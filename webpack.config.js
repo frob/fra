@@ -42,13 +42,13 @@ module.exports = {
         loader: 'jade-loader'
       },
       {
-        test: /\.content$/,
-        loaders: ['raw', './_lib/loaders/yaml-head-loader']
+        test: /\.pug\.content$/,
+        loaders: ['raw', './src/loaders/pug-head-loader', './src/loaders/yaml-head-loader']
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.es6', '.content'],
+    extensions: ['', '.js', '.es6', 'pug', 'jade', '.content.pug'],
     modulesDirectories: ["src/scripts", "web_modules", "bower_components", "node_modules"]
   },
   target: 'node',

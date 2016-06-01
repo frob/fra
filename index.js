@@ -1,15 +1,15 @@
 require('./logger');
 // let yamlParse = require('./_lib/loaders/yaml-head-loader.js');
-let content = require('./content/index.content');
+let content = require('./content/index.pug.content');
 console.log(content);
-// console.log(yamlParse(stuff));
+
 // Exported static site renderer:
 module.exports = function render(locals, callback) {
   let data = {
     localJS: 'index.js',
-    body: content.tail,
+    body: content,
     vars: 'stuff',
-    js: "stuff"
+    js: 'stuff'
   };
   var template = require('./theme/templates/html.pug');
   callback(null, template(data));
