@@ -1,3 +1,4 @@
 node_modules/
 _*
 !_archive
+*log
