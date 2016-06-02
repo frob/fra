@@ -7,14 +7,14 @@ module.exports = function render(locals, callback) {
   let content = '';
   const fs = require('fs');
 
-  const route = (locals.path === '/') ? 'index' : locals.path;
+  const route = (locals.path === '/') ? '/index' : locals.path;
 
   // Start the route resolution.
   fs.stat(`./content/${route}.pug.content`, function (err, stat) {
     if(err === null) {
       console.log(`File exists ./content/${route}.pug.content`);
 
-      content = require(`./content/${route}.pug.content`);
+      content = require('./content' + route + '.pug.content');
       let data = {
         localJS: 'index.js',
         body: content,
