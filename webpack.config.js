@@ -1,6 +1,11 @@
 "use strict";
 
+let glob = require('glob');
+
 let StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+
+let something = glob.sync('./content/**');
+console.log(something);
 
 let routes = [
   '/'
