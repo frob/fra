@@ -4,16 +4,22 @@ let glob = require('glob');
 
 let StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 
-let something = glob.sync('./content/**');
-console.log(something);
+let routes = [];
+let routesMap = {};
+const files = glob.sync('./content/**/*.content');
 
-let routes = [
-  '/'
-  // '404.html',
-  // '/about/',
-  // '/resume/',
-  // '/web-development/web-portfolio/'
-];
+files.forEach((element, index, array) => {
+  let route = array[index].replace('./content/', '');
+
+  if (route.includes('index')) {
+    routes.push('/' + route.replace(/(\.pug|\.md)\.content/, '').replace('index', ''));
+    routesMap['/' + route.replace(/(\.pug|\.md)\.content/, '').replace('index', '')] = route;
+  }
+  else {
+    routes.push('/' + route.replace(/(\.pug|\.md)\.content/, '.html').replace('index', ''));
+    routesMap['/' + route.replace(/(\.pug|\.md)\.content/, '.html').replace('index', '')] = route;
+  }
+});
 
 module.exports = {
   entry: {
