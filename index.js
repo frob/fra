@@ -4,7 +4,7 @@ require('./logger');
 
 // Exported static site renderer:
 module.exports = function render(locals, callback) {
-  let content = '';
+  let contentObject = '';
   const fs = require('fs');
 
   const route = locals.path;
@@ -13,7 +13,9 @@ module.exports = function render(locals, callback) {
   // Start the route resolution.
   fs.stat('./content/' + contentPath, function (err, stat) {
     if (err === null) {
-      content = require(`./content${contentPath}`);
+      contentObject = require(`./content${contentPath}`);
+
+      const content = (typeof contentObject.content === 'undefined') ? contentObject : contentObject.content;
 
       let data = {
         localJS: 'index.js',
