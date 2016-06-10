@@ -65,6 +65,6 @@ module.exports = {
   target: 'node',
   debug: true,
   plugins: [
-    new StaticSiteGeneratorPlugin('index', routes, { }, { })
+    new StaticSiteGeneratorPlugin('index', routes, routesMap, { })
   ]
 }
