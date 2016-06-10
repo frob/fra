@@ -7,15 +7,12 @@ module.exports = function render(locals, callback) {
   let content = '';
   const fs = require('fs');
 
-  const route = /*(locals.path === '/') ? '/index' :*/ locals.path;
-  const contentPath = '/' + locals[locals.path];
-  console.log(contentPath);
+  const route = locals.path;
+  const contentPath = '/' + locals[route];
 
   // Start the route resolution.
   fs.stat('./content/' + contentPath, function (err, stat) {
     if (err === null) {
-      console.log('File exists ./content' + contentPath);
-
       content = require(`./content${contentPath}`);
 
       let data = {
