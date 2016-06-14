@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.pug\.content$/,
-        loaders: ['raw', './src/loaders/pug-head-loader', './src/loaders/yaml-head-loader']
+        loaders: ['raw', './src/loaders/pug-head-loader', './src/template-wrapper', './src/loaders/yaml-head-loader']
       },
       {
         test: /\.md\.content$/,

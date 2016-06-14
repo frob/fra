@@ -1,8 +1,9 @@
 ---
-title: Frank Robert Anderson
+title: Frank Robert Anderson index
 desc: This is the personal site for Frank Robert Anderson
+template: page
 ---
 
-h1.title Frank Robert Anderson
+h1.title Frank Robert Anderson's WebSite
 p.
   Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
