@@ -13,19 +13,14 @@ module.exports = function render(locals, callback) {
   const configurationFiles = locals.configurationFiles;
   let configuration = {};
   configurationFiles.forEach((configFile, i, array) => {
-    configFile = configFile.replace('./config', '/');
-    fs.stat(`./${configFile}`, (err, stat) => {
-      if (err === null) {
-        const configObject = require(`./config${configFile}`);
-        configuration = Object.assign(configuration, configObject);
-      }
-      else if (err.code === 'ENOENT') {
-        console.warn('Couldn\' find configuration file: ./' + configFile);
-      }
-    });
+    configFile = configFile.replace('./config', '');
+    const stat = fs.statSync(`./config${configFile}`);
+    if (stat.isFile()) {
+      const configObject = require(`./config${configFile}`);
+      configuration = Object.assign(configuration, configObject);
+    }
   });
   console.log(configuration);
-
   // Start the route resolution.
   fs.stat('./content/' + contentPath, function (err, stat) {
     if (err === null) {
