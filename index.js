@@ -8,7 +8,23 @@ module.exports = function render(locals, callback) {
   const fs = require('fs');
 
   const route = locals.path;
-  const contentPath = '/' + locals[route];
+  const contentPath = '/' + locals.routesMap[route];
+
+  const configurationFiles = locals.configurationFiles;
+  let configuration = {};
+  configurationFiles.forEach((configFile, i, array) => {
+    configFile = configFile.replace('./config', '/');
+    fs.stat(`./${configFile}`, (err, stat) => {
+      if (err === null) {
+        const configObject = require(`./config${configFile}`);
+        configuration = Object.assign(configuration, configObject);
+      }
+      else if (err.code === 'ENOENT') {
+        console.warn('Couldn\' find configuration file: ./' + configFile);
+      }
+    });
+  });
+  console.log(configuration);
 
   // Start the route resolution.
   fs.stat('./content/' + contentPath, function (err, stat) {
