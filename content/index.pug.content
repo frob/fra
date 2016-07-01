@@ -2,6 +2,7 @@
 title: Frank Robert Anderson index
 desc: This is the personal site for Frank Robert Anderson
 template: page
+bodyClass: another-body class
 ---
 
 h1.title Frank Robert Anderson's WebSite

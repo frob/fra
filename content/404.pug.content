@@ -2,6 +2,7 @@
 title: Frank Robert Anderson 404
 desc: This is the personal site for Frank Robert Anderson
 template: page
+bodyClass: not-found
 ---
 
 h1.title PAGE NOT EXISTING
