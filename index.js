@@ -20,20 +20,24 @@ module.exports = function render(locals, callback) {
       configuration = Object.assign(configuration, configObject);
     }
   });
-  console.log(configuration);
+
   // Start the route resolution.
   fs.stat('./content/' + contentPath, function (err, stat) {
     if (err === null) {
       contentObject = require(`./content${contentPath}`);
 
       const content = (typeof contentObject.content === 'undefined') ? contentObject : contentObject.content;
-
-      let data = {
+      const defaultData = (typeof configuration.defaultData === 'undefined') ? {
         localJS: 'index.js',
-        body: content,
         vars: 'stuff',
         js: 'stuff'
-      };
+      } : configuration.defaultData;
+
+      const data = Object.assign(defaultData, configuration, contentObject.meta);
+
+      data.route = route;
+      data.body = content;
+
       const template = require('./theme/templates/html.pug');
       callback(null, template(data));
     }
