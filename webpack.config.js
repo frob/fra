@@ -64,12 +64,12 @@ module.exports = {
       {
         test: /\.pug\.content$/,
         exclude: /node_modules|~/,
-        loaders: ['raw', './src/loaders/pug-head-loader', './src/template-wrapper', './src/loaders/yaml-head-loader']
+        loaders: ['raw', './src/loaders/pug-head-loader', './src/template-wrapper', 'yaml-head-loader']
       },
       {
         test: /\.md\.content$/,
         exclude: /node_modules|~/,
-        loaders: ['raw', './src/loaders/markdown-head-loader', './src/loaders/yaml-head-loader']
+        loaders: ['raw', './src/loaders/markdown-head-loader', 'yaml-head-loader']
       }
     ]
   },
