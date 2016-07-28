@@ -43,7 +43,14 @@ module.exports = function render(locals, callback) {
     if (err === null) {
       // If there is no error, then continue to load the rest of the
       // contentObject.
-      contentObject = require(`./content${contentPath}`);
+      try {
+        contentObject = require(`./content${contentPath}`);
+      }
+      catch (e) {
+        // @TODO: need to figure out error handling for this. Error handling will be nessesary for UX/DX.
+        console.error(e);
+        return;
+      }
 
       // In order to support content being parsed from straigt markdown/pug or
       // content requiring frontmatter, the content is staight assigned if
