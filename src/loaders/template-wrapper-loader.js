@@ -35,7 +35,16 @@ module.exports = function(contentObject) {
     : `./theme/templates/${contentObject.meta.template}.pug`;
 
   if (templateName !== null) {
-    const template = fs.readFileSync(templateName, 'utf-8');
+    try {
+      const template = fs.readFileSync(templateName, 'utf-8');
+    }
+    catch (err) {
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      console.error(`\nTemplate ${templateName} was not found.`);
+      return;
+    }
     const processor = pug.compile(template);
     // Here we need to add a new line to the tail member to ensure that any new
     // pug or markdown is on a new line and not continuing off of the old line.
