@@ -39,23 +39,24 @@ module.exports = function(contentObject) {
       ? null
       : `./theme/templates/${contentObject.meta.template}.pug`;
 
-        console.log(templateName);
   if (templateName !== null) {
-    try {
+    // Commenting out the error handling as it breaks Everything.
+    // try {
       const template = fs.readFileSync(templateName, 'utf-8');
-    }
-    catch (err) {
-      if (err.code !== 'ENOENT') {
-        console.error(`\nTemplate ${templateName} was not found.`);
-        throw err;
-      }
-      return;
-    }
-    const processor = pug.compile(template);
-    // Here we need to add a new line to the tail member to ensure that any new
-    // pug or markdown is on a new line and not continuing off of the old line.
-    // If this isn't done then the first line will not be parsed.
-    contentObject.tail = processor(Object.assign(contentObject.meta, {tail: "\n" + contentObject.tail}));
+    // }
+    // catch (err) {
+    //   if (err.code !== 'ENOENT') {
+    //     console.error(`\nTemplate ${templateName} was not found.`);
+    //     throw err;
+    //   }
+    // }
+    // finally {
+      const processor = pug.compile(template);
+      // Here we need to add a new line to the tail member to ensure that any new
+      // pug or markdown is on a new line and not continuing off of the old line.
+      // If this isn't done then the first line will not be parsed.
+      contentObject.tail = processor(Object.assign(contentObject.meta, {tail: "\n" + contentObject.tail}));
+    // }
   }
 
   return contentObject;
