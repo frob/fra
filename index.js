@@ -79,7 +79,12 @@ module.exports = function render(locals, callback) {
 
       // If there is a title in the config or content then modify the site name
       // to work with the title.
-      data.siteName = (typeof data.title === 'undefined') ? data.siteName : ' | ' + data.siteName;
+      if (typeof data.title === 'undefined') {
+        data.title = '';
+      }
+      else {
+        data.siteName = ' | ' + data.siteName;
+      }
 
       // Everything is wrapped in a pug generated html file.
       const template = require('./theme/templates/html.pug');
