@@ -28,21 +28,27 @@ const fs = require('fs');
  * @return {String}
  */
 module.exports = function(contentObject) {
-  // Get the name of the template from the meta data.
+  // Get the name of the template from the meta data. If null is passed in the
+  // yaml meta for the template, then no template is to be used. This is checked
+  // by checking typof === object. This might be a bug in the yaml parser and
+  // may need to be fixed if they fix the bug.
   const templateName =
     (typeof contentObject.meta.template === 'undefined')
-    ? null
-    : `./theme/templates/${contentObject.meta.template}.pug`;
+    ? './theme/templates/page.pug'
+    : (typeof contentObject.meta.template === 'object')
+      ? null
+      : `./theme/templates/${contentObject.meta.template}.pug`;
 
+        console.log(templateName);
   if (templateName !== null) {
     try {
       const template = fs.readFileSync(templateName, 'utf-8');
     }
     catch (err) {
       if (err.code !== 'ENOENT') {
+        console.error(`\nTemplate ${templateName} was not found.`);
         throw err;
       }
-      console.error(`\nTemplate ${templateName} was not found.`);
       return;
     }
     const processor = pug.compile(template);
