@@ -16,7 +16,7 @@ defmodule FraWeb.Router do
   scope "/", FraWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/404.html", PageController, :index
   end
 
   # Other scopes may use custom stacks.
